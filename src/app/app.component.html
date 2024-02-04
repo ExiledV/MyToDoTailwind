@@ -1,4 +1,10 @@
 <main>
-  <router-outlet></router-outlet>
+  <app-side-bar
+    [isMobileMenuOpen]="isMobileMenuOpen"
+    (closeMenu)="isMobileMenuOpen = false"
+  ></app-side-bar>
+  <div>
+    <app-top-bar (openMenu)="isMobileMenuOpen = true"></app-top-bar>
+    <router-outlet></router-outlet>
+  </div>
 </main>
-
