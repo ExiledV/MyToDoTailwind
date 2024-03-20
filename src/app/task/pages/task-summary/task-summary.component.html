@@ -1,0 +1,27 @@
+<div class="flex w-full flex-col divide-y p-7">
+    <div class="flex w-full flex-col pb-4">
+        <h1 class="text-5xl font-bold">Resumen</h1>
+        <br />
+        <app-button
+            class="w-12"
+            [icon]="'media-shuffle.svg'"
+            [type]="'primary'"
+        ></app-button>
+    </div>
+    <div class="grid gap-3 py-3 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-6">
+        @for (libreta of favTasks; track $index) {
+            <app-card
+                [title]="libreta.title"
+                [imageSrc]="libreta.image"
+                [tasksDone]="libreta.tasksDone"
+                [totalTasks]="libreta.totalTasks"
+                [themes]="libreta.themes"
+            ></app-card>
+        }
+    </div>
+
+    <div class="flex items-center">
+        <h1>Como lo has hecho:</h1>
+        <app-select class="ml-2" [values]="this.selectOptions"></app-select>
+    </div>
+</div>

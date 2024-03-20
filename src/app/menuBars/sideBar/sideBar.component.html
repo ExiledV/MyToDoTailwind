@@ -1,190 +1,214 @@
 <nav
-  class="h-screen w-72 hidden lg:block sm:ring-1 sm:ring-gray-900/10 bg-gray-50 dark:bg-slate-800 dark:text-white p-4"
+    class="hidden h-screen w-60 bg-gray-50 p-4 sm:ring-1 sm:ring-gray-900/10 lg:block dark:bg-slate-800 dark:text-white"
 >
-  <div class="flex flex-col space-y-4">
-    <div class="flex space-x-2 items-center">
-      <img src="assets/icons/myToDoIcon.png" alt="" class="w-20" />
-      <h2>MyToDo</h2>
+    <div class="flex h-full flex-col space-y-4">
+        <div class="flex items-center space-x-2 hover:cursor-pointer">
+            <img class="w-20" src="assets/icons/myToDoIcon.png" alt="" />
+            <h2>MyToDo</h2>
+        </div>
+
+        <div class="flex h-full flex-col justify-between divide-y">
+            <div class="flex flex-col space-y-7 divide-y">
+                <app-button
+                    [type]="'secondary'"
+                    [text]="'Nueva libreta'"
+                    [icon]="'add.svg'"
+                ></app-button>
+
+                <div class="flex flex-col" id="userTasks">
+                    <ul class="mt-3 space-y-3">
+                        @for (nota of sideBarUserNotes; track $index) {
+                            <li>
+                                <app-button
+                                    [type]="'flat'"
+                                    [text]="nota.title"
+                                ></app-button>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-2 pt-3">
+                <button
+                    class="flex h-8 w-full items-center space-x-2 rounded-md p-3 text-black hover:bg-red-700 hover:text-white active:bg-red-900 dark:text-white"
+                >
+                    <svg
+                        class="hover:fill-white"
+                        class="h-6 w-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
+                        />
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                        />
+                    </svg>
+
+                    <p class="text-center text-start">Configuración</p>
+                </button>
+
+                <button
+                    class="flex h-8 w-full items-center space-x-2 rounded-md p-3 text-black hover:bg-red-700 hover:text-white active:bg-red-900 dark:text-white"
+                >
+                    <img
+                        class="inline-block h-6 w-6 rounded-full ring-2 ring-black"
+                        src="assets/icons/blank-user.png"
+                        alt=""
+                    />
+                    <p class="text-center text-start">Tu usuario</p>
+                </button>
+            </div>
+        </div>
     </div>
-
-    <div class="flex flex-col divide-y space-y-7">
-      <button
-        class="flex h-8 w-full p-3 rounded-md text-red-800 dark:text-white items-center hover:bg-red-700 shadow-md dark:shadow-white dark:shadow-sm hover:text-white space-x-2 active:bg-red-900"
-      >
-        <svg
-          class=""
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-          />
-        </svg>
-
-        <p>Nueva tarea</p>
-      </button>
-
-      <div id="userTasks" class="flex flex-col">
-        <ul class="space-y-3 mt-3">
-          @for (nota of sideBarUserNotes; track $index) {
-            <li>
-              <button
-                class="flex h-8 w-full p-3 rounded-md text-black dark:text-white items-center hover:bg-red-700 hover:text-white space-x-2 active:bg-red-900"
-              >
-                <p class="text-start text-center">{{ nota.title }}</p>
-              </button>
-            </li>
-          }
-        </ul>
-      </div>
-    </div>
-  </div>
 </nav>
 
 <div
-  class="lg:hidden"
-  role="dialog"
-  aria-modal="true"
-  [ngClass]="isMobileMenuOpen ? '' : 'hidden'"
->
-  <!-- Background backdrop, show/hide based on slide-over state. -->
-  <div
-    class="fixed inset-0 z-10"
+    class="lg:hidden"
     [ngClass]="isMobileMenuOpen ? '' : 'hidden'"
-  ></div>
-  <div
-    [ngClass]="isMobileMenuOpen ? 'w-full' : 'w-0'"
-    class="fixed inset-y-0 left-0 z-10 overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 transition-all duration-300 ease-in-out"
-  >
-    <div class="flex items-center justify-between">
-      <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        <img
-          class="h-8 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt=""
-        />
-      </a>
-      <button
-        (click)="closeMobileMenu()"
-        type="button"
-        class="-m-2.5 rounded-md p-2.5 text-gray-700"
-      >
-        <span class="sr-only">Close menu</span>
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-    </div>
-    <div class="mt-6 flow-root">
-      <div class="-my-6 divide-y divide-gray-500/10">
-        <div class="space-y-2 py-6">
-          <div class="-mx-3">
+    role="dialog"
+    aria-modal="true"
+>
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div
+        class="fixed inset-0 z-10"
+        [ngClass]="isMobileMenuOpen ? '' : 'hidden'"
+    ></div>
+    <div
+        class="fixed inset-y-0 left-0 z-10 overflow-y-auto bg-white px-6 py-6 transition-all duration-300 ease-in-out sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+        [ngClass]="isMobileMenuOpen ? 'w-full' : 'w-0'"
+    >
+        <div class="flex items-center justify-between">
+            <a class="-m-1.5 p-1.5" href="#">
+                <span class="sr-only">Your Company</span>
+                <img
+                    class="h-8 w-auto"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    alt=""
+                />
+            </a>
             <button
-              type="button"
-              class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              aria-controls="disclosure-1"
-              aria-expanded="false"
+                class="-m-2.5 rounded-md p-2.5 text-gray-700"
+                (click)="closeMobileMenu()"
+                type="button"
             >
-              Product
-              <!--
+                <span class="sr-only">Close menu</span>
+                <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+                <div class="space-y-2 py-6">
+                    <div class="-mx-3">
+                        <button
+                            class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                            type="button"
+                            aria-controls="disclosure-1"
+                            aria-expanded="false"
+                        >
+                            Product
+                            <!--
                   Expand/collapse icon, toggle classes based on menu open state.
 
                   Open: "rotate-180", Closed: ""
                 -->
-              <svg
-                class="h-5 w-5 flex-none"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <!-- 'Product' sub-menu, show/hide based on menu state. -->
-            <div class="mt-2 space-y-2" id="disclosure-1">
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Analytics</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Engagement</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Security</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Integrations</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Automations</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Watch demo</a
-              >
-              <a
-                href="#"
-                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Contact sales</a
-              >
+                            <svg
+                                class="h-5 w-5 flex-none"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </button>
+                        <!-- 'Product' sub-menu, show/hide based on menu state. -->
+                        <div class="mt-2 space-y-2" id="disclosure-1">
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Analytics</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Engagement</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Security</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Integrations</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Automations</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Watch demo</a
+                            >
+                            <a
+                                class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                href="#"
+                                >Contact sales</a
+                            >
+                        </div>
+                    </div>
+                    <a
+                        class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        href="#"
+                        >Features</a
+                    >
+                    <a
+                        class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        href="#"
+                        >Marketplace</a
+                    >
+                    <a
+                        class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        href="#"
+                        >Company</a
+                    >
+                </div>
+                <div class="py-6">
+                    <a
+                        class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        href="#"
+                        >Log in</a
+                    >
+                </div>
             </div>
-          </div>
-          <a
-            href="#"
-            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >Features</a
-          >
-          <a
-            href="#"
-            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >Marketplace</a
-          >
-          <a
-            href="#"
-            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >Company</a
-          >
         </div>
-        <div class="py-6">
-          <a
-            href="#"
-            class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >Log in</a
-          >
-        </div>
-      </div>
     </div>
-  </div>
 </div>

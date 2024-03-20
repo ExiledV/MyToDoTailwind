@@ -1,0 +1,12 @@
+<button
+    class="flex h-8 w-full items-center space-x-2 rounded-md p-3"
+    [ngClass]="tailwindClass + ' ' + logoFilter"
+    [attr.disabled]="type == 'disabled' ? true : null"
+>
+    @if (this.icon !== undefined) {
+        <img class="h-6 w-6" [src]="'assets/icons/' + this.icon" alt="" />
+    }
+    @if (text) {
+        <p>{{ text }}</p>
+    }
+</button>

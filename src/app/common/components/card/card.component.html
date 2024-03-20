@@ -1,0 +1,34 @@
+<div
+    class="h-22 flex max-w-sm flex-col overflow-hidden rounded shadow-lg ring-1 ring-gray-300 hover:cursor-pointer md:h-full"
+>
+    <div class="flex h-full md:flex-col">
+        <img
+            class="w-20 object-cover md:h-32 md:w-full lg:h-60"
+            [src]="this.imageSrc"
+            alt="Sunset in the mountains"
+        />
+        <div class="flex w-full flex-col justify-between px-6 py-4">
+            <div>
+                <div class="mb-2">
+                    <h3>{{ title }}</h3>
+                    <p class="text-base text-sm text-gray-600">
+                        {{ tasksDone + ' de ' + totalTasks }}
+                    </p>
+                </div>
+                @if (subtitle) {
+                    <p class="text-base text-gray-700">{{ subtitle }}</p>
+                }
+            </div>
+
+            <div class="pt-4">
+                @for (theme of themes; track $index) {
+                    <p
+                        class="mb-2 mr-2 inline-block overflow-ellipsis rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700"
+                    >
+                        #{{ theme }}
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
